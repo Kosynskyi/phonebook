@@ -1,4 +1,8 @@
-@import-normalize; /* bring in normalize.css styles */
+/* @import-normalize; bring in normalize.css styles */
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -12,4 +16,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.MuiFormHelperText-root {
+  color: rgba(206, 108, 23, 0.819) !important;
 }
