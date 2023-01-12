@@ -1,45 +1,40 @@
-import { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import HomePage from 'pages/HomePage';
-import SharedLayout from './SharedLayout';
-import LoginPage from 'pages/LoginPage';
-import RegistrationPage from 'pages/RegistrationPage';
-import ContactsPage from 'pages/ContactsPage';
-// import { Box } from 'utils/Box';
-import { fetchCurrentUser } from 'redux/auth/authOperations';
-// import { selectIsFetchingCurrent } from 'redux/auth/authSelectors';
 
-// user1qwe@gmail.com
+import SharedLayout from './SharedLayout';
+import { fetchCurrentUser } from 'redux/auth/authOperations';
+
 import PrivateRoute from './HOCs/PrivateRoute';
 import PublicRoute from './HOCs/PublicRoute';
 
 import { getContacts } from 'redux/contacts/contactsOperations';
-import useAuth from 'services/hooks/useAuth';
+import useToken from 'services/hooks/useToken';
 
+const HomePage = lazy(() => import('pages/HomePage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
+const RegistrationPage = lazy(() => import('pages/RegistrationPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
+
+// user1qwe@gmail.com
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useAuth();
-
-  // const fetchingCurrent = useSelector(selectIsFetchingCurrent);
-  // console.log(fetchingCurrent);
+  const token = useToken();
 
   useEffect(() => {
-    if (!isLoggedIn) return;
+    if (!token) return;
     dispatch(fetchCurrentUser());
     dispatch(getContacts());
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch, token]);
 
   return (
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage />} />
-          {/* <Route path="login" element={<LoginPage />} />
-          <Route path="registration" element={<RegistrationPage />} /> */}
-          {/* <Route path="contacts" element={<ContactsPage />} /> */}
 
           <Route element={<PublicRoute />}>
             <Route path="login" element={<LoginPage />} />
@@ -49,6 +44,7 @@ export const App = () => {
           <Route element={<PrivateRoute />}>
             <Route path="contacts" element={<ContactsPage />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
       <ToastContainer />

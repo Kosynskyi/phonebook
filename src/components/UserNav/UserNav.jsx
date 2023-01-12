@@ -1,6 +1,7 @@
-import Button from '@mui/joy/Button';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
+import { Box, List, IconButton } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import ContactsIcon from '@mui/icons-material/Contacts';
+
 import useAuth from 'services/hooks/useAuth';
 import { StyledNavLink } from './UserNav.styled';
 
@@ -16,15 +17,23 @@ const UserNav = () => {
         }}
       >
         <StyledNavLink to="/">
-          <Button variant="outlined" size="sm">
-            Home
-          </Button>
+          <IconButton
+            aria-label="home"
+            size="large"
+            sx={{ padding: 0, color: 'grey' }}
+          >
+            <HomeIcon fontSize="inherit" />
+          </IconButton>
         </StyledNavLink>
         {isLoggedIn && (
           <StyledNavLink to="/contacts">
-            <Button variant="outlined" size="sm" sx={{ marginLeft: 1 }}>
-              Contact
-            </Button>
+            <IconButton
+              aria-label="contacts"
+              size="large"
+              sx={{ padding: 0, marginLeft: 2, color: 'grey' }}
+            >
+              <ContactsIcon fontSize="inherit" />
+            </IconButton>
           </StyledNavLink>
         )}
       </List>

@@ -1,10 +1,11 @@
-import React from 'react';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import AuthNav from 'components/AuthNav';
 import UserMenu from 'components/UserMenu';
 import UserNav from 'components/UserNav';
 import useAuth from 'services/hooks/useAuth';
+import Skeleton from 'components/Skeleton';
 
 const SharedLayout = () => {
   const isLoggedIn = useAuth();
@@ -25,7 +26,9 @@ const SharedLayout = () => {
         <UserNav />
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
       </Box>
-      <Outlet />
+      <Suspense fallback={<Skeleton />}>
+        <Outlet />
+      </Suspense>
     </Box>
   );
 };

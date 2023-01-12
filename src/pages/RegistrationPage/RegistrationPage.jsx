@@ -40,7 +40,6 @@ const RegistrationPage = () => {
   } = useForm({ mode: 'onBlur' });
 
   const onSubmit = data => {
-    console.log(data);
     if (data.password !== data.repeatPassword) {
       return toast.error(
         'Password and repeat password does not match, please check them and try again'
