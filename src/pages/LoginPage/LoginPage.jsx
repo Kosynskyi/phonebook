@@ -111,7 +111,7 @@ const LoginPage = () => {
             <TextField
               sx={{
                 paddingY: 0,
-                marginTop: 1,
+                marginTop: 0,
                 width: '100%',
               }}
               id="outlined-basic"
@@ -150,8 +150,6 @@ const LoginPage = () => {
                   required: 'field is required',
                   onChange: handleChange,
                 })}
-                // helperText={errors?.password && errors?.password?.message}
-
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -163,7 +161,7 @@ const LoginPage = () => {
                       {showPassword ? (
                         <VisibilityOff
                           fontSize="small"
-                          sx={{ width: '14px', height: '14px' }}
+                          sx={{ color: 'red', width: '14px', height: '14px' }}
                         />
                       ) : (
                         <Visibility
