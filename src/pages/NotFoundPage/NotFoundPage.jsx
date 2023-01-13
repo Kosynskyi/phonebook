@@ -16,7 +16,7 @@ const NotFoundPage = () => {
       <Typography variant="h1" component="p">
         404
       </Typography>
-      <Typography variant="h2" component="p">
+      <Typography variant="h2" component="p" sx={{ textAlign: 'center' }}>
         page not found :(
       </Typography>
       <Typography variant="h3" component="p">
